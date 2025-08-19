@@ -1,6 +1,11 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.MockedStatic;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 public class HorseTest {
 
@@ -86,9 +91,25 @@ public class HorseTest {
         assertNotEquals(0, horse.getDistance());
     }
 
-    @Test
-    public void getRandomDoubleTest() {
-        Horse horse = new Horse( "test", 10 );
-        assertNotEquals( 0, Horse.getRandomDouble( 0.2, 0.9 ) );
+    @ParameterizedTest
+    @ValueSource(doubles = {0.2, 0.5, 0.9})
+    void testMove_LlamaGetRandomDoubleYCalculaDistancia(double fakeRandom) {
+
+        double speed = 10.0;
+        double initialDistance = 5.0;
+        Horse horse = new Horse("Test", speed, initialDistance);
+
+        try (MockedStatic<Horse> mockedStatic = mockStatic(Horse.class)) {
+
+            mockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9))
+                    .thenReturn(fakeRandom);
+
+            horse.move();
+
+            double expected = initialDistance + speed * fakeRandom;
+            assertEquals(expected, horse.getDistance());
+
+            mockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9), times(1));
+        }
     }
 }
