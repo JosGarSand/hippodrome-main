@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <!-- Appender con rotación diaria -->
+    <RollingFile name="RollingFile" fileName="logs/hippodrome.log" filePattern="logs/hippodrome.%d{yyyy-MM-dd}.log">
+      <PatternLayout>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %-5level %c{1}: %msg%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <!-- Rotar cada día -->
+        <TimeBasedTriggeringPolicy interval="1" />
+      </Policies>
+      <DefaultRolloverStrategy>
+        <!-- Eliminar archivos mayores a 7 días -->
+        <Delete basePath="logs" maxDepth="1">
+          <IfFileName glob="hippodrome.*.log" />
+          <IfLastModified age="7d" />
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+    <!-- Consola (opcional para debug en terminal) -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss} %-5level %c{1}: %msg%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <!-- Logger para cada clase -->
+    <Logger name="Main" level="info" additivity="false">
+      <AppenderRef ref="RollingFile" />
+      <AppenderRef ref="Console" />
+    </Logger>
+    <Logger name="Hippodrome" level="debug" additivity="false">
+      <AppenderRef ref="RollingFile" />
+    </Logger>
+    <Logger name="Horse" level="debug" additivity="false">
+      <AppenderRef ref="RollingFile" />
+    </Logger>
+    <!-- Root logger (por defecto) -->
+    <Root level="info">
+      <AppenderRef ref="RollingFile" />
+      <AppenderRef ref="Console" />
+    </Root>
+  </Loggers>
+</Configuration>

@@ -1,0 +1,10 @@
+2025-08-20 13:09:39,214 DEBUG Horse: Horse created: name=Houdini, speed=2.4, distance=0.0
+2025-08-20 13:09:39,219 DEBUG Horse: Horse created: name=Comanche, speed=2.5, distance=0.0
+2025-08-20 13:09:39,219 DEBUG Horse: Horse created: name=Ranger, speed=2.6, distance=0.0
+2025-08-20 13:09:39,219 DEBUG Horse: Horse created: name=Elvis, speed=2.7, distance=0.0
+2025-08-20 13:09:39,219 DEBUG Horse: Horse created: name=Yoda, speed=2.8, distance=0.0
+2025-08-20 13:09:39,219 DEBUG Horse: Horse created: name=Pegasus, speed=2.9, distance=0.0
+2025-08-20 13:09:39,219 DEBUG Horse: Horse created: name=Shelby, speed=3.0, distance=0.0
+2025-08-20 13:09:39,221 DEBUG Hippodrome: Hippodrome created with 7 horses.
+2025-08-20 13:09:39,221 INFO  Main: Starting the race. Number of horses: 7
+2025-08-20 13:09:59,777 INFO  Main: End of the race. The winner is: Pegasus
